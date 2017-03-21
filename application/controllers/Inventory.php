@@ -35,13 +35,14 @@ class Inventory extends MY_Controller {
         $this->load->helper('form');
         $this->load->model('Product_model');
         if ($this->input->post()) {
+            pr($this->input->post());
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('inventory_from_users_id', 'Inventory From Users Id', 'trim|required');
-            $this->form_validation->set_rules('category_id', 'Product', 'trim|required');
-            $this->form_validation->set_rules('product_id', 'Product', 'trim|required');
-            $this->form_validation->set_rules('inventory_description', 'Description', 'trim');
-            $this->form_validation->set_rules('inventory_product_quantity', 'Inventory Product Quantity', 'trim|required|integer');
-            $this->form_validation->set_rules('inventory_product_price', 'Inventory Product Price', 'trim|required');
+            $this->form_validation->set_rules('inventory_from_users_id', 'Factory Name', 'trim|required|integer');
+            $this->form_validation->set_rules('inventory_bill_number', 'Bill Number', 'trim|required');
+            $this->form_validation->set_rules('inventory_bill_date', 'Date of Bill', 'trim|required');
+            $this->form_validation->set_rules('product_quantity_id[]', 'Product Name', 'trim|required');
+            $this->form_validation->set_rules('product_quantity_volume[]', 'Product Quantity', 'trim|required');
+            $this->form_validation->set_rules('product_quantity_price[]', 'Product Price', 'trim|required');
             $this->form_validation->set_error_delimiters('', '<br />');
             if ($this->form_validation->run()) {
                 $time_now = date('Y-m-d H:i:s');
@@ -69,7 +70,7 @@ class Inventory extends MY_Controller {
             die('0');
         }
         $this->load->model('User_model');
-        $data['categories_details_array'] = $this->Product_model->get_all_active_categories();
+        $data['products_details_array'] = $this->Product_model->get_all_active_products_details();
         $data['factory_users_details_array'] = $this->User_model->get_all_active_users_by_group_id('3');
         parent::render_view($data);
     }
