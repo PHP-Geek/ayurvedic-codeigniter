@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="box-footer text-right">
-                            <a href="<?php echo base_url(); ?>user" class="btn btn-default">Cancel</a>
+                            <a href="<?php echo base_url(); ?>list_factory" class="btn btn-default">Cancel</a>
                             <button id="save_users_button" type="submit" class="btn btn-primary" data-loading-text="Please Wait...">Save <i class="fa fa-chevron-right"></i></button>
                         </div>
                     </form>
