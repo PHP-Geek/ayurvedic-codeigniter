@@ -61,10 +61,10 @@
                     "render": function (data, type, full, meta) {
                         switch (data) {
                             case "1":
-                                return '<div class="text-center"><input onchange="user_status(' + full[0] + ')" id="user_id_' + data[0] + '" type="checkbox" checked="checked" /></div>';
+                                return '<div class="text-center"><input onchange="user_status(' + full[0] + ')" id="user_id_' + full[0] + '" type="checkbox" checked="checked" /></div>';
                                 break;
                             default:
-                                return '<div class="text-center"><input onchange="user_status(' + full[0] + ')" id="user_id_' + data[0] + '" type="checkbox" /></div>';
+                                return '<div class="text-center"><input onchange="user_status(' + full[0] + ')" id="user_id_' + full[0] + '" type="checkbox" /></div>';
                                 break;
                         }
                     }
@@ -83,18 +83,18 @@
     function user_status(user_id) {
         $.post(base_url + "user/change_status", {user_id: user_id, user_status: $("#user_id_" + user_id).is(":checked")}, function (data) {
             if (data === "1") {
-                bootbox.alert("User Status Changed Successfully");
+                bootbox.alert("Factory Status Changed Successfully");
             } else if (data === "0") {
-                bootbox.alert("Error Updating User Status !!!");
+                bootbox.alert("Error Updating Factory Status !!!");
             } else {
                 bootbox.alert(data);
             }
         });
     }
-    function confirm_delete(product_id) {
+    function confirm_delete(user_id) {
         bootbox.confirm("Are you sure you want to proceed ?", function (result) {
             if (result) {
-                $.post(base_url + "products/delete", {product_id: product_id}, function (data) {
+                $.post(base_url + "user/delete", {user_id: user_id}, function (data) {
                     if (data === "1") {
                         document.location.href = "";
                     } else {
