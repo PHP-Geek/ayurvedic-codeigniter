@@ -28,17 +28,21 @@ class Configuration_model extends MY_Model {
         }
         return 0;
     }
-    
+
     function edit_category($category_id, $category_edit_array) {
         return $this->db->where('category_id', $category_id)->update('categories', $category_edit_array);
     }
-    
+
     function get_category_by_id($category_id) {
         return $this->db->get_where('categories', array('category_id' => $category_id))->row_array();
     }
-    
+
     function get_all_categories() {
-        return $this->db->where('category_status','1')->get('categories')->result_array();
+        return $this->db->where('category_status', '1')->get('categories')->result_array();
     }
+
+    function get_all_units() {
+        return $this->db->get('units')->result_array();
+    }   
 
 }
